@@ -4,7 +4,7 @@ exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   for (let i = 0; i < db.users.length; i++) {
-    if (db.users[0].email == email && db.users[0].password == password) {
+    if (db.users[i].email == email && db.users[i].password == password) {
       res.json({
         message: 'login feito com sucesso',
         user: db.users[i],
@@ -16,7 +16,7 @@ exports.loginUser = async (req, res, next) => {
   res.json({
     message: 'Usuario nao encontrado',
   });
-
+  console.log(email,password)
   next();
 };
 

@@ -1,9 +1,31 @@
 import { Container, Form, Logo } from "./styles-signup";
-
+import {useState} from 'react'
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button'
 
 export default function SignUp() {
+
+   const [name,setName] = useState("")
+  const [email,setEmail] = useState("")
+   const [password,setPassword] = useState("")
+
+
+  // // funçao que será chamada quando o usuario apertar o botao de enviar
+  // const handleSubmit = async () =>{
+  //   try {
+  //     const response = await axios.post('http://localhost:4000/endpoint', {
+  //       name: 'Seu Nome',
+  //       email: 'seu.email@example.com',
+  //       password: 'suaSenha123'
+  //     });
+  //     console.log('Data posted successfully:', response.data);
+  //   } catch (error) {
+  //     console.error('Error posting data:', error);
+  //   }
+
+  // }
+
+
   return (
     <Container>
 
@@ -16,14 +38,17 @@ export default function SignUp() {
         </div>
       </Logo>
 
-      <Form>
+      <Form
+      >
         <h2>Crie sua Conta</h2>
 
         <div className="inputs">
           <p>Seu nome</p>
           <Input
            placeholder="Exemplo: Maria da silva"
-           type="text" 
+           type="text"
+           value={name}
+           onChange={(e) => setName(e.target.value)} 
           />
         </div>
 
@@ -32,6 +57,8 @@ export default function SignUp() {
           <Input
            placeholder="Exemplo: exemplo@exemplo.com.br"
            type="text" 
+           value={email}
+           onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -40,10 +67,14 @@ export default function SignUp() {
           <Input 
            placeholder="no mínimo 6 caracteres"
            type="password" 
+           value={password}
+           onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <Button title="Criar conta" />
+        <Button title="Criar conta" 
+          type="submit"
+        />
 
         <a href="#">
           Já tenho uma conta
