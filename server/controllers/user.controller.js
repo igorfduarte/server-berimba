@@ -2,23 +2,29 @@ const db = require('../db/db');
 
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
+  let userFound = false;  // Flag para verificar se o usuário foi encontrado
 
   for (let i = 0; i < db.users.length; i++) {
     if (db.users[i].email == email && db.users[i].password == password) {
+      userFound = true;  // Atualiza a flag
       res.json({
         message: 'login feito com sucesso',
         user: db.users[i],
       });
       next();
+      break;  // Sai do loop assim que o usuário é encontrado
     }
   }
 
-  res.json({
-    message: 'Usuario nao encontrado',
-  });
-  console.log(email,password)
-  next();
+  if (!userFound) {  // Se nenhum usuário foi encontrado
+    res.json({
+      message: 'Usuario nao encontrado',
+    });
+    console.log(email, password);
+    next();
+  }
 };
+
 
 exports.getUser = async (req, res, next) => {
   const id = req.params.id;
